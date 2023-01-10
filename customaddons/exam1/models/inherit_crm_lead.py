@@ -45,7 +45,7 @@ class CrmLead(models.Model):
         # lấy ra id của người dùng hiện tại
         current_user_id = self.env.uid
         # lấy ra id teamember của người dùng hiện tại
-        group_staff_id = self.env['crm.team.member'].search([('user_id', '=', current_user_id)],limit=1).crm_team_id.id
+        group_staff_id = self.env['crm.team.member'].search([('user_id', '=', current_user_id)], limit=1).crm_team_id.id
         # lấy ra những tài khoản của thuộc teamember của người dùng hiện tại
         sales_staff_in_group = self.env['crm.team.member'].search([('crm_team_id', '=', group_staff_id)]).user_id.ids
         if not self.user_has_groups('exam1.group_lead_employee'):
