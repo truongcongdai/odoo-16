@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_purchase_email_template" model="mail.template">
+            <field name="name">Email Template</field>
+            <field name="model_id" ref="exam3.model_sales_purchase"/>
+            <field name="email_to">{{ctx['email_to']}}</field>
+            <field name="email_from">{{ctx['email_from']}}</field>
+            <field name="subject">Báo cáo Tổng hợp Dữ liệu bán hàng và mua hàng trong tháng</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+
+            <h3>I. Kinh Doanh </h3>
+            <table width="850" cellspacing="1" cellpadding="4" border="1" height="25">
+                <thead>
+                    <tr height="50">
+                       <th>Tên nhóm hàng </th>
+                       <th>Doanh thu thực tế </th>
+                       <th>Chênh lệch doanh thu thực tế so với tháng hiện tại </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr <t t-foreach="ctx['indicator_evaluation_record']" t-as="i">
+                        <td>
+                              <p><t t-out="i['name']"/></p>
+                        </td>
+                         <td>
+                              <p><t t-out="i['actual_revenue']"/></p>
+                        </td>
+                         <td>
+                              <p><t t-out="i['revenue_difference']"/></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>II. Mua hàng </h3>
+            <table width="850" cellspacing="1" cellpadding="4" border="1" height="25">
+                <thead>
+                    <tr height="50">
+                       <th>Tên phòng ban</th>
+                       <th>Chi tiêu thực tế </th>
+                       <th>Chênh lệch chi tiêu thực tế so với hạn mức </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr <t t-foreach="ctx['hr_department_record']" t-as="i">
+                        <td>
+                              <p><t t-out="i['name']"/></p>
+                        </td>
+                         <td>
+                              <p><t t-out="i['actual_revenue']"/></p>
+                        </td>
+                         <td>
+                              <p><t t-out="i['revenue_difference']"/></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            ]]>
+        </field>
+    </record>
+</odoo>

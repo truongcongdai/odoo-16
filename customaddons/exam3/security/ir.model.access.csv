@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_s_saless_purchase_employee,access_s_sales_purchase employee,model_sales_purchase,exam1.group_staff_employee,1,1,1,1

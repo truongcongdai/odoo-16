@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sales_purchase_form_view" model="ir.ui.view">
+            <field name="name">sales_purchase_form</field>
+            <field name="model">sales.purchase</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="btn_send_email" string="Send by email" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="create_date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sales_purchase_tree_view" model="ir.ui.view">
+            <field name="name">sales_purchase_tree</field>
+            <field name="model">sales.purchase</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sales_purchase_act_window" model="ir.actions.act_window">
+            <field name="name">Sales Purchase</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sales.purchase</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Report Sales Purchase" id="sales_purchase_menu" action="sales_purchase_act_window"/>
+
+    </data>
+</odoo>
