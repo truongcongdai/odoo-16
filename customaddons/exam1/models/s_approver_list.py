@@ -8,7 +8,7 @@ class ApproverList(models.Model):
     # chỉ show ra những tài khoản thuộc nhóm approver để được chọn trong approve_list
     def _selection_group(self):
         # lấy ra record của approver(người phê duyệt)
-        groups_approve = self.env['res.groups'].search([('name', '=', 'Approver')])
+        groups_approve = self.env['res.groups'].search([('name', '=', 'Approver')], limit=1)
         # lấy ra id trong res_partner của nhóm approver
         res_users_id = groups_approve.users.mapped('partner_id').mapped('id')
         return [('id', 'in', res_users_id)]
