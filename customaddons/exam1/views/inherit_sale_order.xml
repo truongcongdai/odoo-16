@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="inherit_sale_order_view_form" model="ir.ui.view">
+        <field name="name">inherit_sale_order_view_form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="plan_sale_order_id"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_confirm']" position="after">
+                    <button name="%(exam1.plan_sale_order_action)d" string="Create Plan Sale Order"
+                            type="action"/>
+                </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="security_crm_sales_staff" model="ir.module.category">
+            <field name="name">Security Crm Sales</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record model="res.groups" id="group_staff_employee">
+            <field name="name">Employee</field>
+            <field name="category_id" ref="security_crm_sales_staff"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_staff_approver" model="res.groups">
+            <field name="name">Approver</field>
+            <field name="category_id" ref="security_crm_sales_staff"/>
+            <field name="implied_ids" eval="[(4, ref('group_staff_employee'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_manager_employee">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="security_crm_sales_staff"/>
+            <field name="implied_ids" eval="[(4,ref('group_staff_employee'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_lead_employee">
+            <field name="name">Leader</field>
+            <field name="category_id" ref="security_crm_sales_staff"/>
+            <field name="implied_ids" eval="[(4,ref('group_manager_employee'))]"/>
+        </record>
+    </data>
+</odoo>

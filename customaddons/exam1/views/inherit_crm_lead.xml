@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="inherit_crm_lead_form_view" model="ir.ui.view">
+      <field name="name">Inherit Crm Lead</field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+      <field name="arch" type="xml">
+
+          <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="attributes">
+               <attribute name="attrs" >{'invisible': [('check_priority', '=', True)]}</attribute>
+          </xpath>
+
+
+          <xpath expr="//field[@name='user_id']" position="before">
+              <field name="quotation_count" invisible="1"/>
+              <field name="minimum_revenue" widget="monetary" attrs="{'readonly':[('quotation_count','>','0')]}"/>
+              <field name="check_priority" invisible="1"/>
+
+          </xpath>
+
+      </field>
+    </record>
+    <record model="ir.ui.view" id="report_inherit_crm_lead_view_tree">
+            <field name="name">report.inherit.crm.lead.tree.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='contact_name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='email_from']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='activity_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='my_activity_date_deadline']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='stage_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='expected_revenue']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="team_id"/>
+                    <field name="minimum_revenue" widget="monetary"/>
+                    <field name="actual_revenue" widget="monetary"/>
+                </xpath>
+            </field>
+        </record>
+</odoo>
+

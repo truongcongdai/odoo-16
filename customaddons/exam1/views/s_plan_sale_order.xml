@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="plan_sale_order_view_form" model="ir.ui.view">
+            <field name="name">plan.sale.order.view.form</field>
+            <field name="model">plan.sale.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="btn_new" type="object" string="New" class="oe_highlight"
+                        attrs="{'invisible':[('state', 'in' ,('new', 'send','approve', 'refuse'))]}"
+                        groups="exam1.group_staff_employee"/>
+
+                        <button name="btn_send" type="object" string="Send" class="oe_highlight"
+                        attrs="{'invisible':['|',('state', 'in' ,('send','approve')), ('check_send','=',True)]}"
+                        groups="exam1.group_staff_employee"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" attrs="{'readonly':[('state', 'in', ('send', 'approve'))]}"/>
+                            <field name="quotation" attrs="{'readonly':[('state', 'in', ('send', 'approve'))]}"/>
+                            <field name="content" attrs="{'readonly':[('state', 'in', ('send', 'approve'))]}"/>
+                            <field name="check_send" invisible="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Approver List">
+                                <field name="approve_id" attrs="{'readonly': [('state', 'in', ('send','approve'))]}">
+                                    <tree editable="bottom">
+                                        <field name="approver"/>
+                                        <field name="approver_status" string="Status"/>
+                                        <field name="check_approve" invisible="1"/>
+                                        <button name="btn_approve" string="Approve" type="object"
+                                                attrs="{'invisible': ['|',('approver_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"
+                                                groups="exam1.group_staff_approver"/>
+                                        <button name="btn_refuse" string="Refuse" type="object"
+                                                attrs="{'invisible': ['|',('approver_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"
+                                                groups="exam1.group_staff_approver"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="plant_sale_order_view_tree" model="ir.ui.view">
+            <field name="name">plan.sale.order.view.tree</field>
+            <field name="model">plan.sale.order</field>
+            <field name="arch" type="xml">
+                <tree string="Plan Sale order Tree">
+                    <field name="name"/>
+                    <field name="quotation"/>
+                    <field name="content"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="plan_sale_order_action" model="ir.actions.act_window">
+            <field name="name">Plan Sale Order</field>
+            <field name="res_model">plan.sale.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="plan_sale_order_menu" name="Plan Sale Order" parent="sale.sale_menu_root" action="plan_sale_order_action" />
+    </data>
+</odoo>
