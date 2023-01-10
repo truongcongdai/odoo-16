@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <act_window-->
+<!--        id="action_all_customers"-->
+<!--        name="All customers"-->
+<!--        res_model="res.partner"-->
+<!--        view_mode="tree,form"-->
+<!--        domain="[('customer_rank', '>', 0)]"-->
+<!--        context="{'default_customer_rank': 1}"-->
+<!--        limit="20"/>-->
+
+<!--    <record id="view_all_customers_tree" model="ir.ui.view">-->
+<!--        <field name="name">All customers</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="name" />-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="view_all_customers_form" model="ir.ui.view">-->
+<!--        <field name="name">All customers</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <header>-->
+<!--                    <button type="object" name="open_commercial_entity" string="Open commercial partner" class="btn-primary" />-->
+<!--                    <button type="action" name="%(base.action_partner_category_form)d" string="Open Partner Categories"/>-->
+<!--                </header>-->
+<!--                <group string="Content" name="my_content">-->
+<!--                    <field name="name" />-->
+<!--                    <field name="category_id" widget="many2many_tags" />-->
+<!--                </group>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="action_all_customers_tree" model="ir.actions.act_window.view">-->
+<!--        <field name="act_window_id" ref="action_all_customers" />-->
+<!--        <field name="view_id" ref="view_all_customers_tree" />-->
+<!--        <field name="view_mode">tree</field>-->
+<!--        <field name="sequence" eval="2"/>-->
+<!--    </record>-->
+
+<!--    <record id="action_all_customers_form" model="ir.actions.act_window.view">-->
+<!--        <field name="act_window_id" ref="action_all_customers" />-->
+<!--        <field name="view_id" ref="view_all_customers_form" />-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="sequence" eval="2"/>-->
+<!--    </record>-->
+
+
+    <!-- alternative way of act_window -->
+    <!-- <record id='action_all_customers' model='ir.actions.act_window'>
+        <field name="name">All customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('customer_rank', '>', 0)]</field>
+        <field name="context">{'default_customer_rank': 1,'tree_view_ref': 'my_module.view_all_customers_tree', 'form_view_ref': 'my_module.view_all_customers_form'}</field>
+        <field name="limit">20</field>
+    </record> -->
+<!--    05-action-context -->
+<!--     <act_window id="action_all_customers_fr"-->
+<!--        name="Tous les clients"-->
+<!--        res_model="res.partner"-->
+<!--        domain="[('customer_rank', '>', 0)]"-->
+<!--        context="{'lang': 'fr_FR','default_lang': 'fr_FR', 'active_test': False, 'default_customer_rank': 1}" />-->
+
+<!--    06-filters-using-domain-->
+
+<!--    <record id="action_my_customers" model="ir.actions.act_window">-->
+<!--        <field name="name">All my customers who don't speak french</field>-->
+<!--        <field name="res_model">res.partner</field>-->
+<!--        <field name="domain">[('type','=','contact'), ('user_id','=',uid),('lang','!=','fr_FR')]</field>-->
+<!--    </record>-->
+<!--    <record id="action_no_email_or_phone" model="ir.actions.act_window">-->
+<!--        <field name="name">Customer with no email or phone</field>-->
+<!--        <field name="res_model">res.partner</field>-->
+<!--        <field name="domain">['|', ('phone', '=',False), ('email','=',False)]</field>-->
+<!--    </record>-->
+
+<!--    07-list-view-->
+    <record id="tree_all_contacts" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree decoration-bf="customer_rank &gt; 0" decoration-danger="supplier_rank &gt; 0" decoration-warning="customer_rank &gt; 0 and supplier_rank &gt;0">
+                <field name="name"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="state_id" optional="hide"/>
+                <field name="country_id" optional="show"/>
+                <field name="customer_rank" invisible="1"/>
+                <field name="supplier_rank" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_all_contacts" model="ir.actions.act_window">
+        <field name="name">All contacts</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'tree_view_ref':'my_module.tree_all_contacts'}</field>
+        <field name="limit">20</field>
+    </record>
+
+    <menuitem id="menu_custom_top_level" name="My App menu" web_icon="mylibrary,static/description/icon.png"/>
+<!--    <menuitem id="menu_action_my_customer" parent="menu_custom_top_level" action="action_my_customers" sequence="9"/>-->
+<!--    <menuitem id="menu_no_email_or_phone" parent="menu_custom_top_level" action="action_no_email_or_phone" sequence="10" groups="" />-->
+    <menuitem id="menu_action_all_contacts" parent="menu_custom_top_level" action="action_all_contacts" sequence="10" groups="" />
+</odoo>
