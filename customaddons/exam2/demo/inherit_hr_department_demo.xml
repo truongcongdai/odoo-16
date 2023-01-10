@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="hr.department" id="demo_hr_production">
+            <field name="name">Production</field>
+        </record>
+
+        <record model="hr.department" id="demo_hr_it">
+            <field name="name">It</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="limit_purchase_order_form_view" model="ir.ui.view">
+            <field name="name">exam2.limit_purchase_order.form</field>
+            <field name="model">limit.purchase.order</field>
+            <field name="arch" type="xml">
+                <form string="Limit Purchase Order">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="order_limit"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="limit_purchase_order_tree_view" model="ir.ui.view">
+            <field name="name">exam2.limit_purchase_order.tree</field>
+            <field name="model">limit.purchase.order</field>
+            <field name="arch" type="xml">
+                <tree string="Limit Purchase Order">
+                    <field name="name"/>
+                    <field name="order_limit"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="limit_purchase_order_act_window" model="ir.actions.act_window">
+            <field name="name">Limit Purchase Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">limit.purchase.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Limit Purchase Order" id="limit_purchase_order_menu" parent="purchase.menu_purchase_root" action="limit_purchase_order_act_window"/>
+
+    </data>
+</odoo>
