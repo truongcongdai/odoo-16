@@ -58,8 +58,8 @@ setup.py
 /backup
 /customaddons/advanced_crm_sales
 /customaddons/advanced_purchase
-customaddons/odoo_14_vn_accounting_package
-customaddons/odoo_14_vn_accounting_package/
+customaddons/my_library_return/
+customaddons/mylibrary/
 /enterpriseaddons
 /enterpriseaddons/
 README.md
