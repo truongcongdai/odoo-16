@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_limit_purchase,access_limit_purchase_order employee,model_limit_purchase,group_purchasing_staff,1,1,1,1
+access_limit_purchase_accountant,access_limit_purchase_order accountant,model_limit_purchase_order,group_purchasing_staff,1,1,1,1
+access_limit_purchase_employee,access_limit_purchase_order employee,model_limit_purchase_order,group_accountant_staff,1,1,1,1
+access_report_purchase,access_report_purchase employee,model_report_purchase,group_purchasing_staff,1,1,1,1

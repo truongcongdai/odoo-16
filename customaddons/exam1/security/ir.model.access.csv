@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_plan_sale_order_employee,access_plan_sale_order employee,model_plan_sale_order,group_staff_employee,1,1,1,1
+access_approver_list_employee,access_approver_list employee,model_approver_list,group_staff_employee,1,1,1,1
+access_indicator_evaluation_employee,access_indicator_evaluation employee,model_indicator_evaluation,group_staff_employee,1,1,1,1
+access_report_crm_lead_employee,access_report_crm_lead employee,model_report_inherit_crm_lead,group_staff_employee,1,1,1,1
+access_report_indicator_evaluation_employee,access_report_indicator_evaluation employee,model_report_indicator_evaluation,group_staff_employee,1,1,1,1

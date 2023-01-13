@@ -58,9 +58,7 @@ setup.py
 /backup
 /customaddons/advanced_crm_sales
 /customaddons/advanced_purchase
-customaddons/exam2
-customaddons/exam1/
-customaddons/my_library_return/
+customaddons/my_library_return
 customaddons/mylibrary/
 /enterpriseaddons
 /enterpriseaddons/

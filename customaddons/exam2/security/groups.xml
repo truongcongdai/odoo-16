@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="security_hr_department_category">
+            <field name="name">Security Hr Department</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="group_purchasing_staff" model="res.groups">
+            <field name="name">Employee</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="security_hr_department_category"/>
+        </record>
+
+        <record id="group_accountant_staff" model="res.groups">
+            <field name="name">Accountant</field>
+            <field name="category_id" ref="security_hr_department_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_purchasing_staff'))]"/>
+        </record>
+
+
+    </data>
+</odoo>
