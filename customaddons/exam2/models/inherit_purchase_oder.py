@@ -24,7 +24,7 @@ class InheritPurchaseOrder(models.Model):
             # nếu không phải tài khoản thuộc nhóm accountant mà có purchase_limit_order thì so sánh amount_total vs purchase_limit
             # nếu nhỏ hơn thì cho confirm ngược lại raise lỗi
             # ngược lại nếu kg purchase_limit_order thì raise lỗi
-            if len(purchase_limit_record) > 0:
+            if purchase_limit_record:
                 if self.amount_total <= purchase_limit:
                     return super(InheritPurchaseOrder, self).button_confirm()
                 else:
