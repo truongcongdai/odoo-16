@@ -21,7 +21,7 @@ class InheritPurchaseOrderLine(models.Model):
                 price_supplier = self.env['product.supplierinfo'].search(
                     [('product_tmpl_id', '=', int(r.product_id.product_tmpl_id)), ('price', '=', min_price)],
                     order='price asc').mapped('partner_id.name')
-                if len(price_supplier) > 1:
+                if price_supplier:
                     # lấy ra tên nhà san xuất có thời gian thấp nhất
                     shortest_delivery_time = self.env['product.supplierinfo'].search(
                         [('product_tmpl_id', '=', int(r.product_id.product_tmpl_id)), ('price', '=', min_price)],
