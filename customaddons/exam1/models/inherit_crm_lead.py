@@ -12,6 +12,7 @@ class CrmLead(models.Model):
     create_month = fields.Integer('Create Month', compute='_compute_create_month', store=True)
     quotation_count = fields.Integer(compute='_compute_sale_data', string="Number of Quotations")
 
+
     # Tinh actual_revenue = tong amount_total_opportunity
     def _compute_actual_revenue(self):
         for rec in self:
