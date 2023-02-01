@@ -8,14 +8,9 @@ class PlanSaleOder(models.Model):
     name = fields.Text(string='Name', required=True)
     quotation = fields.Many2one('sale.order', string="Quotation", readonly=True)
     content = fields.Text(string="Content", required=True)
-    state = fields.Selection([('new', 'New'), ('send', 'Send'), ('approve', 'Approve'), ('refuse', 'Refuse')])
+    state = fields.Selection([('new', 'New'), ('send', 'Send'), ('approve', 'Approve'), ('refuse', 'Refuse')],default='new')
     approve_id = fields.One2many('approver.list', 'sale_order_id', string='Aprrover')
     check_send = fields.Boolean(compute='_compute_check_send')
-
-    # khi ấn btn new thì thiết lập state = 'new' và approver_status = 'not approved yed'
-    def btn_new(self):
-        self.state = 'new'
-        self.approve_id.approver_status = 'not approved yet'
 
     def btn_send(self):
         mess_send = 'kế hoạch mới đã được gửi đến approve vào ngày %s . Tạo bởi %s' % (fields.Datetime.now(), self.create_uid.name)
