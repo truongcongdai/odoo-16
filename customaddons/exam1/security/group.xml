@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-        <record id="security_crm_sales_staff" model="ir.module.category">
+        <record model="ir.module.category" id="security_crm_sales_staff">
             <field name="name">Security Crm Sales</field>
-            <field name="sequence">10</field>
+            <field name="sequence">1</field>
         </record>
 
         <record model="res.groups" id="group_staff_employee">

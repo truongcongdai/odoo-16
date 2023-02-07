@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="exam1.indicator_evaluation_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='actual_revenue']" position="after">
-                    <field name="revenue_difference" readonly="1"/>
+                    <field name="revenue_difference" widget="monetary" readonly="1"/>
                 </xpath>
             </field>
         </record>

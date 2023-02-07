@@ -6,13 +6,12 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <field name="plan_sale_order_id"/>
-                </xpath>
+                <field name="plan_sale_order_id" domain="[('quotation','=', id)]"/>
+            </xpath>
 
-                <xpath expr="//button[@name='action_confirm']" position="after">
-                    <button name="%(exam1.plan_sale_order_action)d" string="Create Plan Sale Order"
-                            type="action"/>
-                </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="after">
+                <button name="create_plan_sale_order" string="Create Plan Sale Order" type="object"/>
+            </xpath>
         </field>
     </record>
 </odoo>

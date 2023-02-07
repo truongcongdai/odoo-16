@@ -15,7 +15,7 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base', 'crm', 'sale'],
+    'depends': ['base', 'crm', 'sale','sale_crm'],
 
     # always loaded
     'data': [
