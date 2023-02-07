@@ -11,7 +11,7 @@
                             <field name="sale_team"/>
                             <field name="month"/>
                             <field name="actual_revenue" widget="monetary"/>
-                            <field name="revenue_targets"/>
+                            <field name="revenue_targets" widget="monetary"/>
                         </group>
                     </sheet>
                 </form>
@@ -24,8 +24,8 @@
             <field name="arch" type="xml">
                 <tree string="Indicator Evaluation Report">
                     <field name="sale_team"/>
-                    <field name="actual_revenue"/>
-                    <field name="revenue_targets"/>
+                    <field name="actual_revenue" widget="monetary"/>
+                    <field name="revenue_targets" widget="monetary"/>
                 </tree>
             </field>
         </record>

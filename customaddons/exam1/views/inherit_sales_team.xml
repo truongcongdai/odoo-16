@@ -8,7 +8,9 @@
             <xpath expr="//page[@name='members_users']" position="before">
                 <page string="chỉ tiêu doanh số theo tháng(trước VAT)" groups="exam1.group_lead_employee">
                     <group>
+
                         <group>
+                            <field name="currency_id"/>
                             <field name="january" widget="monetary"/>
                             <field name="february" widget="monetary"/>
                             <field name="march" widget="monetary"/>

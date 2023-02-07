@@ -10,7 +10,7 @@ class CrmLead(models.Model):
     check_priority = fields.Boolean(defult=False, compute='_compute_check_priority')
     actual_revenue = fields.Float(string='Actual Revenue', compute='_compute_actual_revenue')
     create_month = fields.Integer('Create Month', compute='_compute_create_month', store=True)
-    quotation_count = fields.Integer(compute='_compute_sale_data', string="Number of Quotations")
+
 
     # Tinh actual_revenue = tong amount_total_opportunity
     def _compute_actual_revenue(self):
@@ -31,7 +31,7 @@ class CrmLead(models.Model):
     def _compute_check_priority(self):
         for r in self:
             r.check_priority = False
-            if r.priority == '3' and not r.user_has_groups('exam1.group_lead_employee'):
+            if (r.priority == '3' and not r.user_has_groups('exam1.group_lead_employee')) or r.priority != '3':
                 r.check_priority = True
 
     # Kiểm tra minimum_revenue nếu nhỏ hơn 0 thì raise lỗi
@@ -48,7 +48,18 @@ class CrmLead(models.Model):
         group_staff_id = self.env['crm.team.member'].search([('user_id', '=', current_user_id)], limit=1).crm_team_id.id
         # lấy ra những tài khoản của thuộc teamember của người dùng hiện tại
         sales_staff_in_group = self.env['crm.team.member'].search([('crm_team_id', '=', group_staff_id)]).user_id.ids
-        if not self.user_has_groups('exam1.group_lead_employee'):
+
+        #lấy ra id của trưởng nhóm bán hàng
+        id_leader = self.env['crm.team'].search([]).user_id.ids
+
+        if current_user_id in id_leader:
+            #lấy ra id của quản lý nhóm bán hàng
+            manager_sales_team = self.env['crm.team'].search([('user_id', '=', current_user_id)]).ids
+            #lấy ra những id nhân viên của trưởng nhóm bán hàng đó quản lý
+            staff_under_manager = self.env['crm.team.member'].search([('crm_team_id', '=', manager_sales_team)]).user_id.ids
+            staff_under_manager.append(current_user_id)
+            return [('id', 'in', staff_under_manager)]
+        else:
             return [('id', 'in', sales_staff_in_group)]
 
     user_id = fields.Many2one(

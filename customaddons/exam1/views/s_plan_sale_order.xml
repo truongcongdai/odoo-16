@@ -7,10 +7,6 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="btn_new" type="object" string="New" class="oe_highlight"
-                        attrs="{'invisible':[('state', 'in' ,('new', 'send','approve', 'refuse'))]}"
-                        groups="exam1.group_staff_employee"/>
-
                         <button name="btn_send" type="object" string="Send" class="oe_highlight"
                         attrs="{'invisible':['|',('state', 'in' ,('send','approve')), ('check_send','=',True)]}"
                         groups="exam1.group_staff_employee"/>
@@ -20,7 +16,7 @@
                     <sheet>
                         <group>
                             <field name="name" attrs="{'readonly':[('state', 'in', ('send', 'approve'))]}"/>
-                            <field name="quotation" attrs="{'readonly':[('state', 'in', ('send', 'approve'))]}"/>
+                            <field name="quotation"/>
                             <field name="content" attrs="{'readonly':[('state', 'in', ('send', 'approve'))]}"/>
                             <field name="check_send" invisible="1"/>
                         </group>
@@ -29,13 +25,13 @@
                                 <field name="approve_id" attrs="{'readonly': [('state', 'in', ('send','approve'))]}">
                                     <tree editable="bottom">
                                         <field name="approver"/>
-                                        <field name="approver_status" string="Status"/>
+                                        <field name="approve_status" string="Status"/>
                                         <field name="check_approve" invisible="1"/>
                                         <button name="btn_approve" string="Approve" type="object"
-                                                attrs="{'invisible': ['|',('approver_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"
+                                                attrs="{'invisible': ['|',('approve_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"
                                                 groups="exam1.group_staff_approver"/>
                                         <button name="btn_refuse" string="Refuse" type="object"
-                                                attrs="{'invisible': ['|',('approver_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"
+                                                attrs="{'invisible': ['|',('approve_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"
                                                 groups="exam1.group_staff_approver"/>
                                     </tree>
                                 </field>

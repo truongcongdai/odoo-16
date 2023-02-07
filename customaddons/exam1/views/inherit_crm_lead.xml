@@ -10,10 +10,12 @@
                <attribute name="attrs" >{'invisible': [('check_priority', '=', True)]}</attribute>
           </xpath>
 
+          <xpath expr="//field[@name='priority']" position="attributes">
+                <attribute name="attrs" >{'invisible': [('active', '=', False)]}</attribute>
+          </xpath>
 
           <xpath expr="//field[@name='user_id']" position="before">
-              <field name="quotation_count" invisible="1"/>
-              <field name="minimum_revenue" widget="monetary" attrs="{'readonly':[('quotation_count','>','0')]}"/>
+              <field name="minimum_revenue" widget="monetary" attrs="{'readonly':['|',('quotation_count','>','0'),('active', '=', False)]}"/>
               <field name="check_priority" invisible="1"/>
 
           </xpath>
