@@ -17,7 +17,6 @@ class ApproverList(models.Model):
         mess_approve = "Kế hoạch mới của bạn đã được phê duyệt vào %s" % (fields.Datetime.now())
         if self.sale_order_id.state == 'send':
             self.approve_status = 'approve'
-            print(self.approver)
             # lấy ra all status của danh sách người phê duyệt
             states = self.sale_order_id.approve_id.mapped('approve_status')
             # nếu tất cả người đều phê duyệt thì state = approve và gửi thông báo
@@ -36,7 +35,6 @@ class ApproverList(models.Model):
             # chỉ cần có 1 người từ chối duyệt thì state = refuse và gửi thông báo
             if ([state == 'refuse'] for state in states):
                 self.sale_order_id.state = 'refuse'
-                self.sale_order_id.approve_id.approve_status = 'not_approved_yet'
                 self.sale_order_id.message_post(partner_ids=self.create_uid.partner_id.ids, body=mess_refuse)
         else:
             raise UserError('người dùng chưa gửi yêu cầu duyệt')

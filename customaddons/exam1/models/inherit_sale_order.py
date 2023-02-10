@@ -6,6 +6,7 @@ class InheritSaleOrder(models.Model):
     _inherit = 'sale.order'
 
     plan_sale_order_id = fields.Many2one('plan.sale.order', string='Plan Sale Order')
+    check_plan_sale_order = fields.Boolean(default=False,compute='_compute_check_plan_sale_order',readonly=False)
 
     # Ghi đè kiểm tra kế hoạch đã thêm và kế hoạch đã được phê duyệt
     def action_confirm(self):
@@ -23,3 +24,7 @@ class InheritSaleOrder(models.Model):
             'view_id': self.env.ref('exam1.plan_sale_order_view_form').id,
             'target': 'current',
         }
+
+    def _compute_check_plan_sale_order(self):
+        if self.id:
+            self.check_plan_sale_order = True

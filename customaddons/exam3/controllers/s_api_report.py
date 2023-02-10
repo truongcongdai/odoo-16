@@ -1,4 +1,5 @@
 import werkzeug.wrappers
+from odoo.exceptions import ValidationError
 
 from odoo import http
 from odoo.http import request
@@ -10,9 +11,11 @@ class ApiReport(http.Controller):
     def controllerapi(self):
         body = json.loads(request.httprequest.data)
         token = "odooneverdie"
-
-        if body["token"] == token and body["month"]:
-
+        if not body.get('token'):
+            raise ValidationError('Chưa có key token trong body!')
+        if not body.get('month'):
+            raise ValidationError('Chưa có key month trong body!')
+        if body.get('token') == token:
             data = {
                 "sales": [],
                 "purchase": [],

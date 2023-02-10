@@ -19,6 +19,7 @@ class PlanSaleOder(models.Model):
         if self.state == 'new' or self.state == 'refuse':
             if self.approve_id.approver:
                 self.state = 'send'
+                self.approve_id.approve_status = 'not_approved_yet'
                 self.message_post(partner_ids=self.approve_id.approver.ids, body=mess_send)
             else:
                 raise UserError('Kế hoạch này không có bất kỳ người phê duyệt')
@@ -31,8 +32,3 @@ class PlanSaleOder(models.Model):
         self.check_send = False
         if current_user_ui != self.create_uid.id:
             self.check_send = True
-
-
-
-
-

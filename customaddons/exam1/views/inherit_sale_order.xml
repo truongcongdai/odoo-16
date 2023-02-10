@@ -6,7 +6,9 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field name="plan_sale_order_id" domain="[('quotation','=', id)]"/>
+                <field name="plan_sale_order_id" domain="[('quotation','=', id)]"
+                attrs="{'invisible': [('check_plan_sale_order', '=', False)]}"/>
+                <field name="check_plan_sale_order" invisible="1"/>
             </xpath>
 
             <xpath expr="//button[@name='action_confirm']" position="after">

@@ -13,18 +13,19 @@ class InheritPurchaseOrderLine(models.Model):
     def _compute_supplier(self):
         for r in self:
             if r.product_id:
+                test = self.env['product.supplierinfo'].search([])
                 # lay ra supplier gia nho nhat
                 min_price = self.env['product.supplierinfo'].search(
-                    [('product_tmpl_id', '=', int(r.product_id.product_tmpl_id))], order='price asc', limit=1).price
+                    [('product_id', '=', r.product_id.id)], order='price asc', limit=1).price
 
-                # lay ra tên nhà san xuất co product_tmpl_id=product_id.product_tmpl_id va gia nho nhat
+                # lay ra tên nhà san xuất co product_id=product_id.id va gia nho nhat
                 price_supplier = self.env['product.supplierinfo'].search(
-                    [('product_tmpl_id', '=', int(r.product_id.product_tmpl_id)), ('price', '=', min_price)],
+                    [('product_id', '=', r.product_id.id), ('price', '=', min_price)],
                     order='price asc').mapped('partner_id.name')
                 if price_supplier:
                     # lấy ra tên nhà san xuất có thời gian thấp nhất
                     shortest_delivery_time = self.env['product.supplierinfo'].search(
-                        [('product_tmpl_id', '=', int(r.product_id.product_tmpl_id)), ('price', '=', min_price)],
+                        [('product_id', '=', r.product_id.id), ('price', '=', min_price)],
                         order='delay asc', limit=1).mapped('partner_id.name')
                     r.supplier = ''.join(shortest_delivery_time)
                 else:

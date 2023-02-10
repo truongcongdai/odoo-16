@@ -7,7 +7,7 @@
       <field name="arch" type="xml">
 
           <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="attributes">
-               <attribute name="attrs" >{'invisible': [('check_priority', '=', True)]}</attribute>
+               <attribute name="attrs" >{'invisible': ['|',('check_priority', '=', True),('active', '=', False) ]}</attribute>
           </xpath>
 
           <xpath expr="//field[@name='priority']" position="attributes">
