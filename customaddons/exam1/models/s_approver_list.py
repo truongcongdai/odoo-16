@@ -14,7 +14,7 @@ class ApproverList(models.Model):
     sale_order_id = fields.Many2one('plan.sale.order', string='Plan Sale Order')
 
     def btn_approve(self):
-        mess_approve = "Kế hoạch mới của bạn đã được phê duyệt vào %s" % (fields.Datetime.now())
+        mess_approve = 'Kế hoạch mới "%s" của bạn đã được phê duyệt vào %s' % (self.sale_order_id.name,fields.Datetime.now())
         if self.sale_order_id.state == 'send':
             self.approve_status = 'approve'
             # lấy ra all status của danh sách người phê duyệt
@@ -27,7 +27,7 @@ class ApproverList(models.Model):
             raise UserError('người dùng chưa gửi yêu cầu duyệt')
 
     def btn_refuse(self):
-        mess_refuse = "Kế hoạch mới của bạn đã bị từ chối vào %s" % (fields.Datetime.now())
+        mess_refuse = 'Kế hoạch mới "%s" của bạn đã bị từ chối vào %s' % (self.sale_order_id.name,fields.Datetime.now())
         if self.sale_order_id.state == 'send':
             self.approve_status = 'refuse'
             # lấy ra all status của danh sách người phê duyệt

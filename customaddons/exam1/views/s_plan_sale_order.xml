@@ -28,11 +28,9 @@
                                         <field name="approve_status" string="Status"/>
                                         <field name="check_approve" invisible="1"/>
                                         <button name="btn_approve" string="Approve" type="object"
-                                                attrs="{'invisible': ['|',('approve_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"
-                                                groups="exam1.group_staff_approver"/>
+                                                attrs="{'invisible': ['|',('approve_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"/>
                                         <button name="btn_refuse" string="Refuse" type="object"
-                                                attrs="{'invisible': ['|',('approve_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"
-                                                groups="exam1.group_staff_approver"/>
+                                                attrs="{'invisible': ['|',('approve_status', 'in', ('refuse', 'approve')),('check_approve','=',False)]}"/>
                                     </tree>
                                 </field>
                             </page>

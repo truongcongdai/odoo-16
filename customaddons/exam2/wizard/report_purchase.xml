@@ -34,7 +34,7 @@
             <field name="view_id" ref="report_purchase_view_form"/>
         </record>
 
-        <menuitem name="Report Purchase" id="report_purchase_menu" parent="hr.menu_hr_root"  action="report_purchase_act_window"/>
+        <menuitem name="Report Purchase" id="report_purchase_menu" parent="purchase.menu_purchase_root"  action="report_purchase_act_window"/>
 
     </data>
 </odoo>

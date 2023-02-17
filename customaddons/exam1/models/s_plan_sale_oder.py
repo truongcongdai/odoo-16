@@ -13,8 +13,10 @@ class PlanSaleOder(models.Model):
     check_send = fields.Boolean(compute='_compute_check_send')
 
     def btn_send(self):
-        mess_send = 'kế hoạch bán hàng mới được gửi đến bạn vào ngày %s . ' % (fields.Datetime.now() )
-        self.quotation = self.env.context.get('active_id')
+        mess_send = 'kế hoạch bán hàng mới "%s" được gửi đến bạn vào ngày %s . ' % (self.name,fields.Datetime.now() )
+        if not self.quotation:
+            self.quotation = self.env.context.get('active_id')
+
         # nếu state = new hoặc = refuse thì khi ấn send state = send và gửi thông báo
         if self.state == 'new' or self.state == 'refuse':
             if self.approve_id.approver:

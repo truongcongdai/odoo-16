@@ -6,7 +6,7 @@ class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
     sale_team = fields.Many2one('crm.team', string='Sales Team')
-    minimum_revenue = fields.Float(string='Minimum Revenue (VAT)')
+    minimum_revenue = fields.Float(string='Minimum Revenue (VAT)' , default=0.0)
     check_priority = fields.Boolean(defult=False, compute='_compute_check_priority')
     actual_revenue = fields.Float(string='Actual Revenue', compute='_compute_actual_revenue')
     create_month = fields.Integer('Create Month', compute='_compute_create_month', store=True)
@@ -35,9 +35,9 @@ class CrmLead(models.Model):
                 r.check_priority = True
 
     # Kiểm tra minimum_revenue nếu nhỏ hơn 0 thì raise lỗi
-    @api.constrains('minimum_revenue')
+    @api.onchange('minimum_revenue')
     def _check_minimum_revenue(self):
-        if self.minimum_revenue <= 0:
+        if self.minimum_revenue < 0:
             raise ValidationError('Doanh thu tối thiểu phải lớn hơn 0')
 
     # chỉ assign cho nhân viên cùng nhóm còn leader assign all

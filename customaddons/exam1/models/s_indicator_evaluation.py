@@ -3,8 +3,12 @@ from odoo import models, fields, api
 
 class IndicatorEvaluationReport(models.Model):
     _name = 'indicator.evaluation'
+    # chọn sale_team chưa có trong indicator_evaluation
+    def _select_sale_team_name(self):
+        id_sale_team = self.env['indicator.evaluation'].search([]).mapped('sale_team').ids
+        return [('id', 'not in', id_sale_team)]
 
-    sale_team = fields.Many2one('crm.team', string="Nhóm bán hàng")
+    sale_team = fields.Many2one('crm.team', string="Nhóm bán hàng", domain=_select_sale_team_name)
     actual_revenue = fields.Float(string="Doanh thu thực tế", compute="_compute_actual_revenue")
     month = fields.Selection([('1', 'January'), ('2', 'February'), ('3', 'March'),
                               ('4', 'April'), ('5', 'May'), ('6', 'June'), ('7', 'July'), ('8', 'August'),
