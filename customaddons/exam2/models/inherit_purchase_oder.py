@@ -13,10 +13,8 @@ class InheritPurchaseOrder(models.Model):
         current_user = self.env.uid
         # kiem tra tai khoan hien tai co thuoc nhom accountant
         check_group = self.user_has_groups('exam2.group_accountant_staff')
-        # lấy ra ngày tạo gần nhất của limit_purchase_ids
-        last_date_limit_purchase_ids = self.env['limit.purchase'].search([], order='create_date DESC', limit=1).mapped('limit_purchase_ids')
         # lay ra ban ghi co gioi han mua hang(limit purchase order) cao nhat
-        purchase_limit_record = last_date_limit_purchase_ids.search([('name', '=', current_user),('id','in',last_date_limit_purchase_ids.ids)],
+        purchase_limit_record = self.env['limit.purchase.order'].search([('name', '=', current_user)],
                                                                         order='order_limit DESC', limit=1)
         purchase_limit = purchase_limit_record.order_limit
         # nếu tài khoản thuộc nhóm accountant thì cho confirm

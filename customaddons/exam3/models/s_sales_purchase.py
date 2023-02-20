@@ -5,33 +5,29 @@ class SalesPurchase(models.Model):
     _name = 'sales.purchase'
 
     def btn_send_email(self):
-        # lay ra ban ghi co nhom la accountant
-        accountant_group_record = self.env['res.groups'].sudo().search([('name', '=', 'Accountant')])
-        # lay ra id cua thuoc nhom Accountant cua res_partner
-        res_users_id = accountant_group_record.users.mapped('partner_id').mapped('id')
         # lấy ra email của accountant
-        email_accountant = self.env['res.partner'].search([('id', 'in', res_users_id)]).mapped('email')
+        email_accountant = self.env.ref('exam2.group_accountant_staff').users.mapped('email')
         # lấy ra all record của indicator evaluation
         indicator_evaluation_record = self.env['indicator.evaluation'].search([])
         records_sale = []
-        for i in indicator_evaluation_record:
-            if i:
+        for rec in indicator_evaluation_record:
+            if rec:
                 sale = {
-                    "name" : i.sale_team.name,
-                    "actual_revenue" : i.actual_revenue,
-                    "revenue_difference" : i.revenue_difference,
+                    "name" : rec.sale_team.name,
+                    "actual_revenue" : rec.actual_revenue,
+                    "revenue_difference" : rec.revenue_difference,
                 }
                 records_sale.append(sale)
 
         # lấy ra all record của hr department
         hr_department_record = self.env['hr.department'].search([])
         records_department = []
-        for i in hr_department_record:
-            if i:
+        for rec in hr_department_record:
+            if rec:
                 department = {
-                    "name": i.name,
-                    "actual_revenue": i.actual_revenue,
-                    "revenue_difference": i.revenue_difference,
+                    "name": rec.name,
+                    "actual_revenue": rec.actual_revenue,
+                    "revenue_difference": rec.revenue_difference,
                 }
                 records_department.append(department)
 

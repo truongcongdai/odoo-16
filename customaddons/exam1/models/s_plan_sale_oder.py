@@ -13,15 +13,16 @@ class PlanSaleOder(models.Model):
     check_send = fields.Boolean(compute='_compute_check_send')
 
     def btn_send(self):
-        mess_send = 'kế hoạch bán hàng mới "%s" được gửi đến bạn vào ngày %s . ' % (self.name,fields.Datetime.now() )
+
+        #nếu mà chưa có quotation thì gán quotation = active_id
         if not self.quotation:
             self.quotation = self.env.context.get('active_id')
-
         # nếu state = new hoặc = refuse thì khi ấn send state = send và gửi thông báo
         if self.state == 'new' or self.state == 'refuse':
             if self.approve_id.approver:
                 self.state = 'send'
                 self.approve_id.approve_status = 'not_approved_yet'
+                mess_send = 'kế hoạch bán hàng mới "%s" được gửi đến bạn vào ngày %s . ' % (self.name, fields.Datetime.now())
                 self.message_post(partner_ids=self.approve_id.approver.ids, body=mess_send)
             else:
                 raise UserError('Kế hoạch này không có bất kỳ người phê duyệt')

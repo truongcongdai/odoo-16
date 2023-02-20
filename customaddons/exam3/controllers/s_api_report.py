@@ -23,21 +23,21 @@ class ApiReport(http.Controller):
             # lấy ra all record của indicator evaluation với supperuser với create_month = month
             indicator_evaluation_record = request.env['indicator.evaluation'].sudo().search(
                 [('month', '=', body["month"])])
-            for i in indicator_evaluation_record:
-                if i:
+            for rec in indicator_evaluation_record:
+                if rec:
                     data['sales'].append({
-                        'name': i.sale_team.name,
-                        'actual_revenue': i.actual_revenue,
-                        'revenue_difference': i.revenue_difference,
+                        'name': rec.sale_team.name,
+                        'actual_revenue': rec.actual_revenue,
+                        'revenue_difference': rec.revenue_difference,
                     })
             # lấy ra all record của hr department với supperuser với create_month = month
             hr_department_record = request.env['hr.department'].sudo().search([('create_month', '=', body["month"])])
-            for i in hr_department_record:
-                if i:
+            for rec in hr_department_record:
+                if rec:
                     data['purchase'].append({
-                        'name': i.name,
-                        'actual_revenue': i.actual_revenue,
-                        'revenue_difference': i.revenue_difference,
+                        'name': rec.name,
+                        'actual_revenue': rec.actual_revenue,
+                        'revenue_difference': rec.revenue_difference,
                     })
 
             return data

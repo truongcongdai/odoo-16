@@ -11,7 +11,7 @@
           </xpath>
 
           <xpath expr="//field[@name='priority']" position="attributes">
-                <attribute name="attrs" >{'invisible': [('active', '=', False)]}</attribute>
+                <attribute name="attrs" >{'invisible': ['|',('active', '=', False),('priority','=','3')]}</attribute>
           </xpath>
 
           <xpath expr="//field[@name='user_id']" position="before">
