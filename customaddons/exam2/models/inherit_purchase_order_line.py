@@ -9,23 +9,32 @@ class InheritPurchaseOrderLine(models.Model):
                                  index='btree_not_null')
 
     # tìm supplier có gía nhỏ nhất
+    # @api.depends('product_id')
+    # def _compute_supplier(self):
+    #     for r in self:
+    #         if r.product_id:
+    #             price_supplier = ''
+    #             # lay ra supplier gia nho nhat
+    #             price = r.product_id.seller_ids.mapped('price')
+    #             if price:
+    #                 min_price = min(r.product_id.seller_ids.mapped('price'))
+    #                 # lay ra tên nhà san xuất co product_id=product_id.id va gia nho nhat
+    #                 price_supplier = r.product_id.seller_ids.search([('price','=',min_price)]).mapped('partner_id.name')
+    #             if price_supplier:
+    #                 # lấy ra tên nhà san xuất có thời gian thấp nhất
+    #                 shortest_delivery_time = r.product_id.seller_ids.search([('price','=',min_price)],order='delay asc', limit=1).partner_id.name
+    #                 r.supplier = shortest_delivery_time
+    #             else:
+    #                 r.supplier = price_supplier
+
     @api.depends('product_id')
     def _compute_supplier(self):
-        for r in self:
-            if r.product_id:
-                # lay ra supplier gia nho nhat
-                min_price = self.env['product.supplierinfo'].search(
-                    [('product_tmpl_id', '=', int(r.product_id.product_tmpl_id))], order='price asc', limit=1).price
-
-                # lay ra tên nhà san xuất co product_tmpl_id=product_id.product_tmpl_id va gia nho nhat
-                price_supplier = self.env['product.supplierinfo'].search(
-                    [('product_tmpl_id', '=', int(r.product_id.product_tmpl_id)), ('price', '=', min_price)],
-                    order='price asc').mapped('partner_id.name')
-                if price_supplier:
-                    # lấy ra tên nhà san xuất có thời gian thấp nhất
-                    shortest_delivery_time = self.env['product.supplierinfo'].search(
-                        [('product_tmpl_id', '=', int(r.product_id.product_tmpl_id)), ('price', '=', min_price)],
-                        order='delay asc', limit=1).mapped('partner_id.name')
-                    r.supplier = ''.join(shortest_delivery_time)
-                else:
-                    r.supplier = ''.join(price_supplier)
+        for rec in self:
+            if rec.product_id:
+                rec.supplier = ''
+                supplier_line = rec.product_id.seller_ids
+                supplier_line_delay = supplier_line.sorted(lambda x: x.delay)
+                if supplier_line_delay:
+                    supplier_line_price = supplier_line_delay.sorted(lambda x: x.price)
+                    supplier_name = supplier_line_price.mapped('partner_id.name')[0]
+                    rec.supplier = supplier_name
