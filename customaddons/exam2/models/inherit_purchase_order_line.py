@@ -13,8 +13,7 @@ class InheritPurchaseOrderLine(models.Model):
         for rec in self:
             if rec.product_id:
                 rec.supplier = ''
-                supplier_line = rec.product_id.seller_ids
-                supplier_line_delay = supplier_line.sorted(lambda x: x.delay)
+                supplier_line_delay = rec.product_id.seller_ids.sorted(lambda x: x.delay)
                 if supplier_line_delay:
                     supplier_line_price = supplier_line_delay.sorted(lambda x: x.price)
                     supplier_name = supplier_line_price.mapped('partner_id.name')[0]
