@@ -14,21 +14,20 @@ class ApproverList(models.Model):
     sale_order_id = fields.Many2one('plan.sale.order', string='Plan Sale Order')
 
     def btn_approve(self):
-        mess_approve = "Kế hoạch mới của bạn đã được phê duyệt vào %s" % (fields.Datetime.now())
         if self.sale_order_id.state == 'send':
             self.approve_status = 'approve'
-            print(self.approver)
             # lấy ra all status của danh sách người phê duyệt
             states = self.sale_order_id.approve_id.mapped('approve_status')
             # nếu tất cả người đều phê duyệt thì state = approve và gửi thông báo
             if all([state == 'approve' for state in states]):
                 self.sale_order_id.state = 'approve'
+                mess_approve = 'Kế hoạch mới "%s" của bạn đã được phê duyệt vào %s' % (
+                self.sale_order_id.name, fields.Datetime.now())
                 self.sale_order_id.message_post(partner_ids=self.create_uid.partner_id.ids, body=mess_approve)
         else:
             raise UserError('người dùng chưa gửi yêu cầu duyệt')
 
     def btn_refuse(self):
-        mess_refuse = "Kế hoạch mới của bạn đã bị từ chối vào %s" % (fields.Datetime.now())
         if self.sale_order_id.state == 'send':
             self.approve_status = 'refuse'
             # lấy ra all status của danh sách người phê duyệt
@@ -36,7 +35,8 @@ class ApproverList(models.Model):
             # chỉ cần có 1 người từ chối duyệt thì state = refuse và gửi thông báo
             if ([state == 'refuse'] for state in states):
                 self.sale_order_id.state = 'refuse'
-                self.sale_order_id.approve_id.approve_status = 'not_approved_yet'
+                mess_refuse = 'Kế hoạch mới "%s" của bạn đã bị từ chối vào %s' % (
+                self.sale_order_id.name, fields.Datetime.now())
                 self.sale_order_id.message_post(partner_ids=self.create_uid.partner_id.ids, body=mess_refuse)
         else:
             raise UserError('người dùng chưa gửi yêu cầu duyệt')
