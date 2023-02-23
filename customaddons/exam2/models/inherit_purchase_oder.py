@@ -14,8 +14,7 @@ class InheritPurchaseOrder(models.Model):
         # kiem tra tai khoan hien tai co thuoc nhom accountant
         check_group = self.user_has_groups('exam2.group_accountant_staff')
         # lay ra ban ghi co gioi han mua hang(limit purchase order) cao nhat
-        purchase_limit_record = self.env['limit.purchase.order'].search([('name', '=', current_user)],
-                                                                        order='order_limit DESC', limit=1)
+        purchase_limit_record = self.env['limit.purchase.order'].search([('name', '=', current_user)], order='order_limit DESC', limit=1)
         purchase_limit = purchase_limit_record.order_limit
         # nếu tài khoản thuộc nhóm accountant thì cho confirm
         if check_group:
