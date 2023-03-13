@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="base_tiki_form_view" model="ir.ui.view">
+            <field name="name">base.integrate.tiki.form</field>
+            <field name="model">base.integrate.tiki</field>
+            <field name="arch" type="xml">
+                <form>
+                    <button name="get_token_tiki" type="object" string="Send" class="oe_highlight"/>
+                    <sheet>
+                        <group>
+                            <field name="test"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="base_tiki_tree_view" model="ir.ui.view">
+            <field name="name">base.integrate.tiki.tree</field>
+            <field name="model">base.integrate.tiki</field>
+            <field name="arch" type="xml">
+                <header>
+                    <button name="get_token_tiki" type="object" string="Send" class="oe_highlight"/>
+                </header>
+                <tree string="ModelTitle" >
+                    <field name="test"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="base_tiki_act_window" model="ir.actions.act_window">
+            <field name="name">Tiki</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">base.integrate.tiki</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+        <menuitem id="menu_base_tiki" name="Tiki" />
+        <menuitem name="Tiki shop" id="tiki_shop_act" parent="menu_base_tiki" action="base_tiki_act_window"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tiki,access_tiki employee,model_base_integrate_tiki,base.group_user,1,1,1,1
+access_product_tiki,access_product_tiki employee,model_product_product,base.group_user,1,1,1,1
+access_brand_tiki,access_brand_tiki employee,model_brand_tiki,base.group_user,1,1,1,1
+access_category_tiki,access_category_tiki employee,model_category_tiki,base.group_user,1,1,1,1
+access_warehouses_tiki,access_warehouses_tiki employee,model_warehouses_tiki,base.group_user,1,1,1,1
+access_warehouses_tiki_line,access_warehouses_tiki_line employee,model_warehouses_tiki_line,base.group_user,1,1,1,1
+access_product_origin,access_product_origin employee,model_product_origin,base.group_user,1,1,1,1
+access_s_product_attribute,access_s_product_attribute employee,model_product_attribute,base.group_user,1,1,1,1

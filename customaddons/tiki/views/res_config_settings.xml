@@ -1,0 +1,51 @@
+<odoo>
+    <record id="res_config_setting_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='languages']" position="before">
+                <div id="tiki_integrate">
+                    <h2>Tiki</h2>
+                    <div class="row mt16 o_settings_container" name="tiki_integrate">
+                            <div class="o_setting_right_pane mt8">
+                                <button name="btn_connect_tiki" type="object" string="Connect Tiki" class="oe_highlight"/>
+                            </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane mt8">
+                                <div>
+                                    <label for="client_id"/>
+                                    <div >
+                                        <field name="client_id" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="url_tiki"/>
+                                    <div >
+                                        <field name="url_tiki" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <label for="client_secret"/>
+                                    <div >
+                                        <field name="client_secret"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="tiki_api"/>
+                                    <div >
+                                        <field name="tiki_api"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

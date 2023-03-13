@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="category_tiki_form_view" model="ir.ui.view">
+            <field name="name">category.tiki.form</field>
+            <field name="model">category.tiki</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+<!--                                <field name="description"/>-->
+                            </group>
+                            <group>
+<!--                                <field name="parent_id"/>-->
+                                <field name="category_id"/>
+<!--                                <field name="parent_id_category"/>-->
+<!--                                <field name="parent_path"/>-->
+<!--                                <field name="complete_name"/>-->
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="category_tiki_tree_view" model="ir.ui.view">
+            <field name="name">category.tiki.tree</field>
+            <field name="model">category.tiki</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="name"/>
+<!--                    <field name="description"/>-->
+<!--                    <field name="parent_id_category"/>-->
+                    <field name="category_id"/>
+<!--                    <field name="parent_id"/>-->
+<!--                    <field name="parent_path"/>-->
+<!--                    <field name="complete_name"/>-->
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="category_tiki_act_window" model="ir.actions.act_window">
+            <field name="name">category tiki</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">category.tiki</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Category" id="category_tiki_menu" parent="menu_base_tiki" action="category_tiki_act_window"/>
+
+    </data>
+</odoo>
