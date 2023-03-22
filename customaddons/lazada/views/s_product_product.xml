@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+
+     <record model="ir.ui.view" id="product_product_view_form">
+            <field name="name">product.product.view.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_open_label_layout']" position="after">
+                    <button type="object" name="create_product_lazada" string="Tạo sản phẩm lazada"/>
+                </xpath>
+
+            </field>
+        </record>
+        <!--         actions -->
+        <record model="ir.actions.act_window" id="product_lazada_act_window">
+            <field name="name">Sản phẩm</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!--         menu -->
+        <menuitem id="menu_product_lazada" name="lazada Shop" />
+        <menuitem name="Sản phẩm" id="product_lazada_act" parent="menu_product_lazada"/>
+        <menuitem name="Sản phẩm" id="product_lazada" parent="product_lazada_act" action="product_lazada_act_window"/>
+    </data>
+</odoo>
+<!--        <menuitem name="Product Tiki" id="product_tiki_act" parent="menu_base_tiki" action="product_tiki_act_window"/>-->
+
+<!--    </data>-->
+<!--</odoo>-->

@@ -13,7 +13,7 @@ class CategoryTiki(models.Model):
     is_product_listing_enabled = fields.Boolean()
     no_license_seller_enabled = fields.Boolean()
 
-    category_product_id = fields.One2many('product.product','product_category_id')
+    category_product_id = fields.One2many('product.template','product_category_id')
     complete_name = fields.Char('Complete Name', compute='_compute_complete_name', recursive=True, store=True)
     parent_id_category = fields.Many2one('category.tiki', 'Parent Category', index=True, ondelete='cascade')
     parent_path = fields.Char(index=True, unaccent=False)

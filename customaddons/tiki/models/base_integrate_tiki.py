@@ -68,5 +68,21 @@ class BaseIntegrateTiki(models.Model):
         )
         return res
 
-
+    def _delete_data_tiki(self, url, token, data=None, files=None, params=None, headers=None):
+        if headers is None:
+            headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer %s' % (token,),
+                'User-Agent': 'Odoo'
+            }
+        data = data or dict()
+        res = requests.delete(
+            url,
+            data=data,
+            params=params,
+            files=files,
+            headers=headers,
+            verify=False
+        )
+        return res
 

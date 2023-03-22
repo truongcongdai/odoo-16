@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="category_lazada_form_view" model="ir.ui.view">
+            <field name="name">category.lazada.form</field>
+            <field name="model">category.lazada</field>
+            <field name="arch" type="xml">
+                <header>
+                     <button type="object" name="get_categories_lazada" string="Tạo lazada"/>
+                </header>
+                <form string="ModelTitle">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="category_id"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="category_lazada_tree_view" model="ir.ui.view">
+            <field name="name">category.lazada.tree</field>
+            <field name="model">category.lazada</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="name"/>
+
+                    <field name="category_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="category_lazada_act_window" model="ir.actions.act_window">
+            <field name="name">category lazada</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">category.lazada</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Category" id="category_lazada_menu" parent="product_lazada_act" action="category_lazada_act_window"/>
+
+    </data>
+</odoo>

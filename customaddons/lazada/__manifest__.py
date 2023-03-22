@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "tiki_api",
+    'name': "lazada_api",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -26,13 +26,12 @@
     'data': [
         'security/ir.model.access.csv',
         'views/res_config_settings.xml',
-        'views/base_integrate_tiki.xml',
-        'views/s_product_template.xml',
-        'views/category_tiki.xml',
-        'views/warehouses_tiki.xml',
-        'views/warehouses_seller_tiki.xml',
-        'views/s_product_attribute.xml',
+        # 'views/base_integrate_tiki.xml',
         'views/s_product_product.xml',
+        'views/category_lazada.xml',
+        'views/brand_lazada.xml',
+        # 'views/warehouses_tiki.xml',
+        # 'views/s_product_attribute.xml',
 
     ],
 

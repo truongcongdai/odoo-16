@@ -37,8 +37,5 @@
             <field name="res_model">base.integrate.tiki</field>
             <field name="view_mode">tree,kanban,form</field>
         </record>
-        <menuitem id="menu_base_tiki" name="Tiki" />
-        <menuitem name="Tiki shop" id="tiki_shop_act" parent="menu_base_tiki" action="base_tiki_act_window"/>
-
     </data>
 </odoo>

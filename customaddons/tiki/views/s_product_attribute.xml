@@ -34,9 +34,5 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <!--        menu-->
-
-        <menuitem name="Thuộc tính" id="product_attribute_act" parent="product_tiki_act" action="product_attribute_action"/>
-
     </data>
 </odoo>

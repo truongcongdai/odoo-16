@@ -51,7 +51,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem name="Category" id="category_tiki_menu" parent="menu_base_tiki" action="category_tiki_act_window"/>
+        <menuitem name="Category" id="category_tiki_menu" parent="product_tiki_act" action="category_tiki_act_window"/>
 
     </data>
 </odoo>

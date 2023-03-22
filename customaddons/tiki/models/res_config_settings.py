@@ -9,5 +9,6 @@ class ResConfigSettings(models.TransientModel):
     tiki_api = fields.Char(string="Tiki Api", config_parameter='tiki.api')
 
     def btn_connect_tiki(self):
-        category = self.env['category.tiki'].get_categories_tiki
-        warehouses = self.env['warehouses.tiki'].get_warehouses_tiki
+        self.env['category.tiki'].get_categories_tiki
+        self.env['warehouses.tiki'].get_warehouses_tiki
+        self.env['warehouses.seller.tiki'].get_warehouses_seller_tiki

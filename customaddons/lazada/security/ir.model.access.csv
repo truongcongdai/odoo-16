@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_s_product_product,access_s_product_product employee,model_product_product,base.group_user,1,1,1,1
+access_category_lazada,access_category_lazada employee,model_category_lazada,base.group_user,1,1,1,1
+access_brand_lazada,access_brand_lazada employee,model_brand_lazada,base.group_user,1,1,1,1

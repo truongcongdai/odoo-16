@@ -1,0 +1,51 @@
+<odoo>
+    <record id="res_config_setting_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='languages']" position="before">
+                <div id="Lazada_integrate">
+                    <h2>Lazada</h2>
+                    <div class="row mt16 o_settings_container" name="lazada_integrate">
+                            <div class="o_setting_right_pane mt8">
+                                <button name="btn_connect_lazada" type="object" string="Connect lazada" class="oe_highlight"/>
+                            </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane mt8">
+                                <div>
+                                    <label for="app_key_lazada"/>
+                                    <div >
+                                        <field name="app_key_lazada" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="app_secret_lazada"/>
+                                    <div >
+                                        <field name="app_secret_lazada" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div>
+                                    <label for="authorizationCode"/>
+                                    <div >
+                                        <field name="authorizationCode"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="lazada_url"/>
+                                    <div >
+                                        <field name="lazada_url"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
