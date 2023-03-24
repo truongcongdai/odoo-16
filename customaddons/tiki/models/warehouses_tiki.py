@@ -38,22 +38,37 @@ class  WarehousesSeller(models.Model):
     warehouses_id_seller = fields.Char(string="Warehouses Id")
     is_primary = fields.Boolean()
     seller_id = fields.Char()
-    status = fields.Boolean()
+    status = fields.Boolean("Status")
+    street = fields.Text("Street")
+    country_name = fields.Char("Country Name")
+    country_code = fields.Char("Country Code")
+    region_name = fields.Char("Region Name")
+    region_code = fields.Char("Region Code")
+    district_name = fields.Char("District Name")
+    district_code = fields.Char("District Code")
+    ward_name = fields.Char("Ward Name")
+    ward_code = fields.Char("Ward Code")
 
 
     def get_warehouses_seller_tiki(self):
         url_tiki = self.env['ir.config_parameter'].sudo().get_param('url.tiki', '')
-        tiki_api = self.env['ir.config_parameter'].sudo().get_param('tiki.api', '')
         token = self.env['base.integrate.tiki'].get_token_tiki()
-        url = "%s/integration/v2/seller-inventories?tiki_warehouse_codes=" % url_tiki
+        url = "%s/integration/v2/sellers/me/warehouses" % url_tiki
         req = self.env['base.integrate.tiki']._get_data_tiki(url=url, token=token)
         if req.status_code == 200:
             self.env['warehouses.seller.tiki'].sudo().search([]).unlink()
-            for res in req.json()['seller_inventories']:
+            for res in req.json()['data']:
                 self.env['warehouses.seller.tiki'].sudo().create({
                     'name': res['name'],
                     'warehouses_id_seller': res['id'],
                     'is_primary': res['is_primary'],
-                    'seller_id': res['seller_id'],
+                    'street': res['street'],
+                    'country_name': res['country']['name'],
+                    'country_code': res['country']['code'],
+                    'district_name': res['district']['name'],
+                    'district_code': res['district']['code'],
+                    'ward_name': res['ward']['name'],
+                    'ward_code': res['ward']['code'],
                     'status': res['status']
                 })
+            print('oke')

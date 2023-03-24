@@ -18,15 +18,15 @@ class SProductTemplate(models.Model):
     product_width = fields.Float(string="Chiều rộng",default="0",required=True)
     product_length = fields.Float(string="Chiều dài",default="0",required=True)
     product_weight_kg = fields.Float('Trọng lượng sau đóng gói (kg)',default="0",required=True)
-    is_warranty_applied = fields.Selection([('0', 'Không có bảo hành'),
-                                            ('1', 'Có bảo hành')
-                                            ], default="0", string="Sản phẩm có bảo hành không?")
+    # is_warranty_applied = fields.Selection([('0', 'Không có bảo hành'),
+    #                                         ('1', 'Có bảo hành')
+    #                                         ], default="0", string="Sản phẩm có bảo hành không?")
     inventory_type = fields.Selection([('dropship', 'Nhà bán tự đóng gói, Tiki giao hàng'),
                                        ('instock', 'FBT - Hàng lưu kho tiki'),
                                        ], string='Mô hình vận hành',required=True)
     # warehouse_product_id = fields.One2many('warehouses.tiki.line', 'product_id_warehouses', string='Kho Tiki')
     is_auto_turn_on = fields.Boolean('Auto turn', default=False)
-    ulr_image = fields.Text('Tài liệu thương hiệu',required=True)
+    ulr_image = fields.Text('Tài liệu thương hiệu')
     type_certificate = fields.Selection([('brand', 'Brand')],default="brand" ,string="Type")
     sku = fields.Char(string='Sku')
     bulky = fields.Selection([("0", 'Không'),("1", 'Có'),], string='Hàng cồng kềnh',default="0")
@@ -46,13 +46,20 @@ class SProductTemplate(models.Model):
                               ('deleted', 'Deleted')
                               ], compute="state_product_tiki",string="Trạng thái tiki",default='none')
     tmpl_product_id = fields.One2many('product.product','product_tmpl_id')
-    is_inventory_type = fields.Boolean(compute="_compute_is_inventory_type")
+    is_inventory_type = fields.Boolean(compute="_compute_is_inventory_type",default=False)
+    is_brand_id = fields.Boolean(compute="_compute_is_brand_id",default=False)
+
+    @api.depends('brand_id.name')
+    def _compute_is_brand_id(self):
+        self.is_brand_id = False
+        if self.brand_id.name == 'OEM':
+            self.is_brand_id = True
 
     def _compute_is_inventory_type(self):
+        self.is_inventory_type = False
         if len(self.attribute_line_ids) >0:
             self.is_inventory_type = True
-        else:
-            self.is_inventory_type = False
+
     @api.constrains('product_height','product_width','product_length','product_weight_kg')
     def constrains_weight_or_dimensions(self):
         for r in self:
@@ -100,6 +107,7 @@ class SProductTemplate(models.Model):
         url = "%s/integration/v2.1/requests"%url_tiki
         url_imgbb = "https://api.imgbb.com/1/upload"
         data = {
+            "expiration":"300",
             "key": "abec198575d0126e6305462fcedb028a",
             "image": self.image_1920,
         }
@@ -118,7 +126,7 @@ class SProductTemplate(models.Model):
                 "product_width": self.product_width,
                 "product_length": self.product_length,
                 "product_weight_kg": self.product_weight_kg,
-                "is_warranty_applied": self.is_warranty_applied
+                "is_warranty_applied": 0
             },
             "image": https_image,
             "option_attributes": [],
@@ -156,13 +164,14 @@ class SProductTemplate(models.Model):
             for r in range(len(self.product_variant_ids)):
                 try:
                     data = {
+                        "expiration": "300",
                         "key": "abec198575d0126e6305462fcedb028a",
-                        "image": self.product_variant_ids[r].image,
+                        "image": self.product_variant_ids[r].image_1920,
                     }
                     rec_image_variants = requests.post(url_imgbb, data).json()
                     https_image_variants = rec_image_variants['data']['url']
                 except:
-                    https_image_variants = self.product_variant_ids[r].image
+                    https_image_variants = ""
                 payload['variants'].append({
                     "sku": self.product_variant_ids[r].sku,
                     "price": self.product_variant_ids[r].lst_price,

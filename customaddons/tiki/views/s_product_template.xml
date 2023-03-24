@@ -51,11 +51,13 @@
                          <field name="product_length"/>
                          <field name="product_width"/>
                          <field name="product_height"/>
+                         <field name="is_auto_turn_on"/>
                          <field name="inventory_type"/>
-                         <field name="is_warranty_applied"/>
+<!--                         <field name="is_warranty_applied"/>-->
                          <field name="is_option" invisible="1"/>
                          <field name="is_reason" invisible="1"/>
                          <field name="is_inventory_type" invisible="1"/>
+                         <field name="is_brand_id" invisible="1"/>
                      </group>
                  </xpath>
 
@@ -64,9 +66,9 @@
                         <field name="description" widget="html"/>
                     </page>
 
-                    <page name="certificate_files" string="Tài liệu yêu cầu">
+                    <page name="certificate_files" string="Tài liệu yêu cầu" attrs="{'invisible':[('is_brand_id', '=',True)]}">
                         <group>
-                            <field name="ulr_image"/>
+                            <field name="ulr_image"  attrs="{'required': [('is_brand_id','=', False)]}"/>
                             <field name="type_certificate"/>
                         </group>
                     </page>

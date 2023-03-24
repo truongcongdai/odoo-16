@@ -1,3 +1,5 @@
+import base64
+
 from odoo import fields, api, models
 from odoo.exceptions import ValidationError, UserError
 import json
@@ -7,7 +9,7 @@ class SProductTemplateAttributeValue(models.Model):
     _inherit = 'product.product'
 
     sku = fields.Char(string='Sku',required=True)
-    image = fields.Image(string="Image")
+    # image = fields.Image(string="Image",help='Product media is empty or Image size < 500 x 500 pixels')
     is_inventory_type = fields.Boolean(compute="_compute_is_inventory_type")
     warehouse_product_id = fields.One2many('warehouses.tiki.line', 'product_id_warehouses', string='Kho Tiki')
 
@@ -24,3 +26,5 @@ class SProductTemplateAttributeValue(models.Model):
         for r in self:
             if r.inventory_type != 'dropship':
                 r.is_inventory_type = True
+
+

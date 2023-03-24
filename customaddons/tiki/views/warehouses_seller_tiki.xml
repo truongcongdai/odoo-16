@@ -7,6 +7,9 @@
             <field name="model">warehouses.seller.tiki</field>
             <field name="arch" type="xml">
                 <form string="ModelTitle">
+                    <header>
+                        <button type="object" name="get_warehouses_seller_tiki" string="Tạo sản phẩm Tiki" />
+                    </header>
                     <sheet>
                         <group>
                             <group>

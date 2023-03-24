@@ -27,7 +27,7 @@
         'security/ir.model.access.csv',
         'views/res_config_settings.xml',
         # 'views/base_integrate_tiki.xml',
-        'views/s_product_product.xml',
+        'views/s_product_template.xml',
         'views/category_lazada.xml',
         'views/brand_lazada.xml',
         # 'views/warehouses_tiki.xml',

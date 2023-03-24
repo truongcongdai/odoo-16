@@ -10,7 +10,7 @@
                 <xpath expr="//group[@name='pricing']" position="after">
                     <group>
                         <field name="sku" string="Sku"/>
-                        <field name="image"/>
+<!--                        <field name="image" widget="image" options="{'size': [150, 150]}"/>-->
                         <field name="is_inventory_type" invisible="1"/>
                         <field name="warehouse_product_id" widget="one2many" attrs="{'invisible': [('is_inventory_type', '=',True)]}">
                              <tree string="warehouses" editable="bottom">

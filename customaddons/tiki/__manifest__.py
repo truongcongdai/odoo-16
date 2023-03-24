@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','base_setup','product'],
+    'depends': ['base','base_setup','product','sale'],
 
     # always loaded
     'data': [
@@ -32,7 +32,8 @@
         'views/warehouses_tiki.xml',
         'views/warehouses_seller_tiki.xml',
         'views/s_product_attribute.xml',
-        'views/s_product_product.xml',
+        'views/s_product_template.xml',
+        'views/s_order_tiki.xml',
 
     ],
 

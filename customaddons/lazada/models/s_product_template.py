@@ -9,7 +9,7 @@ import time, hmac, hashlib
 from odoo import fields, models
 
 class SProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = 'product.template'
 
     def create_product_lazada(self):
         appKey = self.env['ir.config_parameter'].sudo().get_param('app.key.lazada', '')
